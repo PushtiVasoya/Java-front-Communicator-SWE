@@ -1,4 +1,4 @@
-package login;
+package controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 /**
@@ -90,5 +91,54 @@ class AuthServiceTest {
 
         final boolean invalidJoin = authService.joinMeeting(student, "fake-meeting-id");
         assertFalse(invalidJoin, "Joining with invalid ID should fail");
+    }
+}
+
+class FrontendIntegrationTest {
+    /** Service handling authentication logic for tests. */
+    private AuthService authService;
+    /** The frontend integration instance to be tested. */
+    private FrontendIntegration frontend;
+
+    @BeforeEach
+    void setUp() {
+        authService = new AuthService();
+        frontend = new FrontendIntegration();
+    }
+
+    @Test
+    void testFrontendRegister() {
+        final String response = frontend.onRegister("abc@gmail.com", "password");
+        assertEquals("Registration Failed", response, "Should fail for invalid domain");
+
+        final String successResponse = frontend.onRegister("abc@smail.iitpkd.ac.in", "password");
+        assertEquals("Registration Successful", successResponse, "Should succeed for valid student email");
+    }
+
+    @Test
+    void testFrontendLogin() {
+        final User user = frontend.onLogin("abc@gmail.com", "password");
+        assertNull(user, "Login should fail for unregistered user");
+    }
+
+    @Test
+    void testFrontendCreateMeeting() {
+        final String expectedError = "Error: Only instructors can create meetings!";
+        final String actualResponse = frontend.onCreateMeeting(new User("abc@gmail.com", "password", "student"));
+        assertEquals(expectedError, actualResponse, "Should return an error message for a student");
+
+        final String successResponse = frontend.onCreateMeeting(new User("pro@iitpkd.ac.in", "password", "instructor"));
+        assertNotEquals(expectedError, successResponse, "Instructor should get a valid meeting ID");
+    }
+
+    @Test
+    void testFrontendJoinMeeting() {
+        final String res = frontend.onJoinMeeting(new User("abc@gmail.com", "password", "student"), "some-meeting-id");
+        assertEquals("Invalid Meeting ID", res, "Should return error for non-existent meeting ID");
+
+        final String meetId = frontend.onCreateMeeting(new User("pro@iitpkd.ac.in", "password", "instructor"));
+        final String successRes = frontend.onJoinMeeting(new User("abc@smail.iitpkd.ac.in",
+                "pass", "instructor"), meetId);
+        assertEquals("Joined Successfully", successRes, "Should return success message");
     }
 }

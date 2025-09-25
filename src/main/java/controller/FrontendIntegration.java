@@ -1,4 +1,4 @@
-package login;
+package controller;
 
 /**
  * Acts as the frontend integration layer for testing purposes.

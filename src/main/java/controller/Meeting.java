@@ -1,4 +1,4 @@
-package login;
+package controller;
 
 import java.util.UUID;
 

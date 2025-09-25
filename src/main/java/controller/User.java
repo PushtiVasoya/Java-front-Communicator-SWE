@@ -1,4 +1,4 @@
-package login;
+package controller;
 
 /**
  * Represents a user of the system (instructor or student).

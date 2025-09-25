@@ -1,4 +1,4 @@
-package login;
+package controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -82,4 +82,3 @@ public class AuthService {
         return meetings.containsKey(meetingIdParam);
     }
 }
-
