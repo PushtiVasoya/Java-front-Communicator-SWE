@@ -5,7 +5,7 @@ import java.util.UUID;
 /**
  * Represents a meeting created by an instructor.
  */
-public class Meeting {
+public class MeetingSession {
     /** Unique meeting ID. */
     private final String meetingId;
 
@@ -20,7 +20,7 @@ public class Meeting {
      *
      * @param createdByParam email of the instructor who created the meeting
      */
-    public Meeting(final String createdByParam) {
+    public MeetingSession(final String createdByParam) {
         this.meetingId = UUID.randomUUID().toString(); // generate unique ID
         this.createdBy = createdByParam;
         this.createdAt = System.currentTimeMillis();

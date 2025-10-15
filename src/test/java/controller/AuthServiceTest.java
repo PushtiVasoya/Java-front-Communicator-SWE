@@ -68,12 +68,12 @@ class AuthServiceTest {
     void testCreateMeetingOnlyInstructor() {
         authService.register("teacher@iitpkd.ac.in", "pass123");
         final User instructor = authService.login("teacher@iitpkd.ac.in", "pass123");
-        final Meeting meeting = authService.createMeeting(instructor);
+        final MeetingSession meeting = authService.createMeeting(instructor);
         assertNotNull(meeting, "Instructor should be able to create meeting");
 
         authService.register("student@smail.iitpkd.ac.in", "pass456");
         final User student = authService.login("student@smail.iitpkd.ac.in", "pass456");
-        final Meeting studentMeeting = authService.createMeeting(student);
+        final MeetingSession studentMeeting = authService.createMeeting(student);
         assertNull(studentMeeting, "Student should not be able to create meeting");
     }
 
@@ -81,7 +81,7 @@ class AuthServiceTest {
     void testJoinMeeting() {
         authService.register("teacher@iitpkd.ac.in", "pass123");
         final User instructor = authService.login("teacher@iitpkd.ac.in", "pass123");
-        final Meeting meeting = authService.createMeeting(instructor);
+        final MeetingSession meeting = authService.createMeeting(instructor);
 
         authService.register("student@smail.iitpkd.ac.in", "pass456");
         final User student = authService.login("student@smail.iitpkd.ac.in", "pass456");

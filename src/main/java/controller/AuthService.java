@@ -13,7 +13,7 @@ public class AuthService {
     private final Map<String, UserProfile> users = new HashMap<>();
 
     /** Meetings mapped by meetingId. */
-    private final Map<String, Meeting> meetings = new HashMap<>();
+    private final Map<String, MeetingSession> meetings = new HashMap<>();
 
     /**
      * The PasswordEncoder is the modern, standard way to handle password security.
@@ -75,11 +75,11 @@ public class AuthService {
      * @param userParam logged-in user
      * @return Meeting if created, null if user is not an instructor
      */
-    public Meeting createMeeting(final UserProfile userParam) {
+    public MeetingSession createMeeting(final UserProfile userParam) {
         if (!"instructor".equals(userParam.getRole())) {
             return null;
         }
-        final Meeting meeting = new Meeting(userParam.getEmail());
+        final MeetingSession meeting = new MeetingSession(userParam.getEmail());
         meetings.put(meeting.getMeetingId(), meeting);
         return meeting;
     }
