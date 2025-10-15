@@ -12,6 +12,9 @@ public class Meeting {
     /** Email of the instructor who created the meeting. */
     private final String createdBy;
 
+    /** Time the meeting was created. */
+    private final long createdAt;
+
     /**
      * Creates a new meeting with a unique ID.
      *
@@ -20,6 +23,7 @@ public class Meeting {
     public Meeting(final String createdByParam) {
         this.meetingId = UUID.randomUUID().toString(); // generate unique ID
         this.createdBy = createdByParam;
+        this.createdAt = System.currentTimeMillis();
     }
 
     /**
@@ -38,5 +42,14 @@ public class Meeting {
      */
     public String getCreatedBy() {
         return createdBy;
+    }
+
+    /**
+     * Gets the creation time of the meeting.
+     *
+     * @return createdAt timestamp
+     */
+    public long getCreatedAt() {
+        return createdAt;
     }
 }

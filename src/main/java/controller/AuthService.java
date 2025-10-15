@@ -2,17 +2,29 @@ package controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * Handles authentication and meeting management.
  */
 public class AuthService {
     /** Registered users mapped by email. */
-    private final Map<String, User> users = new HashMap<>();
+    private final Map<String, UserProfile> users = new HashMap<>();
 
     /** Meetings mapped by meetingId. */
     private final Map<String, Meeting> meetings = new HashMap<>();
 
+    /**
+     * The PasswordEncoder is the modern, standard way to handle password security.
+     * We create one instance and reuse it.
+     */
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthService() {
+        // The "work factor" (e.g., 12) determines how strong the hashing is.
+        this.passwordEncoder = new BCryptPasswordEncoder(12);
+    }
     /**
      * Registers a new user with domain-based role validation.
      *
@@ -20,7 +32,7 @@ public class AuthService {
      * @param passwordParam user password
      * @return true if registration succeeds, false otherwise
      */
-    public boolean register(final String emailParam, final String passwordParam) {
+    public boolean register(final String emailParam, final String passwordParam, final String displayNameParam, final String logoUrlParam) {
         if (users.containsKey(emailParam)) {
             return false;
         }
@@ -34,7 +46,8 @@ public class AuthService {
             return false;
         }
 
-        users.put(emailParam, new User(emailParam, passwordParam, role));
+        String hashedPassword = passwordEncoder.encode(passwordParam);
+        users.put(emailParam, new UserProfile(emailParam, displayNameParam, hashedPassword, logoUrlParam, role));
         return true;
     }
 
@@ -45,12 +58,12 @@ public class AuthService {
      * @param passwordParam user password
      * @return User if login succeeds, null otherwise
      */
-    public User login(final String emailParam, final String passwordParam) {
+    public UserProfile login(final String emailParam, final String passwordParam) {
         if (!users.containsKey(emailParam)) {
             return null;
         }
-        final User user = users.get(emailParam);
-        if (!user.getPassword().equals(passwordParam)) {
+        final UserProfile user = users.get(emailParam);
+        if (!passwordEncoder.matches(passwordParam, user.getPasswordHash())) {
             return null;
         }
         return user;
@@ -62,7 +75,7 @@ public class AuthService {
      * @param userParam logged-in user
      * @return Meeting if created, null if user is not an instructor
      */
-    public Meeting createMeeting(final User userParam) {
+    public Meeting createMeeting(final UserProfile userParam) {
         if (!"instructor".equals(userParam.getRole())) {
             return null;
         }
@@ -78,7 +91,7 @@ public class AuthService {
      * @param meetingIdParam meeting ID
      * @return true if joined, false otherwise
      */
-    public boolean joinMeeting(final User userParam, final String meetingIdParam) {
+    public boolean joinMeeting(final UserProfile userParam, final String meetingIdParam) {
         return meetings.containsKey(meetingIdParam);
     }
 }
