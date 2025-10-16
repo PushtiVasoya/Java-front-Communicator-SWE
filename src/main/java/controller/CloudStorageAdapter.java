@@ -35,7 +35,6 @@ public class CloudStorageAdapter {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(cloudApiBaseUrl + "/api/sessions"))
                 .header("Content-Type", "application/json")
-                // Assuming you need to send an auth token to the cloud API as well
                 .header("Authorization", "Bearer " + getCloudServiceAuthToken())
                 .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                 .build();
@@ -73,7 +72,6 @@ public class CloudStorageAdapter {
     }
 
     private String getCloudServiceAuthToken() {
-        // In a real app, this would get a secure token for communicating with the cloud service.
         return "super-secret-service-to-service-token";
     }
 }
