@@ -12,9 +12,6 @@ public class AuthService {
     /** Registered users mapped by email. */
     private final Map<String, UserProfile> users = new HashMap<>();
 
-    /** Meetings mapped by meetingId. */
-    private final Map<String, MeetingSession> meetings = new HashMap<>();
-
     /**
      * The PasswordEncoder is the modern, standard way to handle password security.
      * We create one instance and reuse it.
@@ -32,9 +29,9 @@ public class AuthService {
      * @param passwordParam user password
      * @return true if registration succeeds, false otherwise
      */
-    public boolean register(final String emailParam, final String passwordParam, final String displayNameParam, final String logoUrlParam) {
+    public UserProfile register(final String emailParam, final String passwordParam, final String displayNameParam, final String logoUrlParam) {
         if (users.containsKey(emailParam)) {
-            return false;
+            return null;
         }
 
         final String role;
@@ -43,12 +40,13 @@ public class AuthService {
         } else if (emailParam.endsWith("@smail.iitpkd.ac.in")) {
             role = "student";
         } else {
-            return false;
+            return null;
         }
 
         String hashedPassword = passwordEncoder.encode(passwordParam);
-        users.put(emailParam, new UserProfile(emailParam, displayNameParam, hashedPassword, logoUrlParam, role));
-        return true;
+        UserProfile user = new UserProfile(emailParam, displayNameParam, hashedPassword, logoUrlParam, role);
+        users.put(emailParam, user);
+        return user;
     }
 
     /**
@@ -67,31 +65,5 @@ public class AuthService {
             return null;
         }
         return user;
-    }
-
-    /**
-     * Creates a new meeting (only for instructors).
-     *
-     * @param userParam logged-in user
-     * @return Meeting if created, null if user is not an instructor
-     */
-    public MeetingSession createMeeting(final UserProfile userParam) {
-        if (!"instructor".equals(userParam.getRole())) {
-            return null;
-        }
-        final MeetingSession meeting = new MeetingSession(userParam.getEmail());
-        meetings.put(meeting.getMeetingId(), meeting);
-        return meeting;
-    }
-
-    /**
-     * Joins a meeting using meeting ID.
-     *
-     * @param userParam logged-in user
-     * @param meetingIdParam meeting ID
-     * @return true if joined, false otherwise
-     */
-    public boolean joinMeeting(final UserProfile userParam, final String meetingIdParam) {
-        return meetings.containsKey(meetingIdParam);
     }
 }
