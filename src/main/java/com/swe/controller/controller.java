@@ -1,4 +1,4 @@
-package controller;
+package com.swe.controller;
 
 public class controller {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package controller;
+package com.swe.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
