@@ -1,3 +1,3 @@
 # Java-front-Communicator-SWE
 
-Module Name - COntroller
+Module Name - Controller
