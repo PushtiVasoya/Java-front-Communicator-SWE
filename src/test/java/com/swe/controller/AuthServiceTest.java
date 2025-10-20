@@ -1,7 +1,7 @@
 package com.swe.controller;
 
-import com.swe.controller.AuthService;
-import com.swe.controller.MeetingSession;
+import com.swe.controller.Auth.AuthService;
+import com.swe.controller.meeting.MeetingSession;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

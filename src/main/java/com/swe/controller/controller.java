@@ -1,5 +1,10 @@
 package com.swe.controller;
 
+import com.swe.controller.Auth.AuthService;
+import com.swe.controller.meeting.MeetingServices;
+import com.swe.controller.meeting.MeetingSession;
+import com.swe.controller.meeting.UserProfile;
+
 public class controller {
     public static void main(String[] args) {
         System.out.println("--- Controller Application Starting ---");

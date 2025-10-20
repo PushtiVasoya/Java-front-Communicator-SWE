@@ -1,4 +1,4 @@
-package com.swe.controller;
+package com.swe.controller.meeting;
 
 import java.util.UUID;
 
