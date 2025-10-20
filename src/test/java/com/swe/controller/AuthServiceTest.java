@@ -1,4 +1,4 @@
-package controller;
+package com.swe.controller;
 
 import com.swe.controller.AuthService;
 import com.swe.controller.MeetingSession;

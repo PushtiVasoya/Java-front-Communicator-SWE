@@ -31,12 +31,13 @@ public class MeetingServices {
      * @param meetingIdParam meeting ID
      * @return true if joined, false otherwise
      */
-    public boolean joinMeeting(final UserProfile userParam, final String meetingIdParam, ClientNode clientNode, ClientNode deviceNode, AbstractController networkController) {
+    public boolean joinMeeting(final UserProfile userParam, final String meetingIdParam,
+                               ClientNode clientNode, ClientNode deviceNode, AbstractController networkController) {
 //        this.clientNode = clientNode;
 //        this.networkController = networkController;
 
         networkController.addUser(deviceNode, clientNode);
 
-        return meetings.containsKey(meetingIdParam);
+ 69       return meetings.containsKey(meetingIdParam);
     }
 }

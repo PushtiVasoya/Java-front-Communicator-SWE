@@ -21,7 +21,7 @@ public class CloudStorageAdapter {
         this.cloudApiBaseUrl = cloudApiBaseUrl;
     }
 
-    /**
+    /*
      * Asks the Cloud module to create a new meeting session.
      * Corresponds to: POST /api/sessions
      *
