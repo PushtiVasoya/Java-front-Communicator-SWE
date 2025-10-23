@@ -1,9 +1,9 @@
 package com.swe.controller;
 
 import com.swe.controller.Auth.AuthService;
-import com.swe.controller.meeting.MeetingServices;
-import com.swe.controller.meeting.MeetingSession;
-import com.swe.controller.meeting.UserProfile;
+import com.swe.controller.Meeting.MeetingServices;
+import com.swe.controller.Meeting.MeetingSession;
+import com.swe.controller.Meeting.UserProfile;
 
 public class controller {
     public static void main(String[] args) {

@@ -3,7 +3,7 @@ package com.swe.controller.Auth;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.swe.controller.meeting.UserProfile;
+import com.swe.controller.Meeting.UserProfile;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

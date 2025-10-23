@@ -1,8 +1,8 @@
 package com.swe.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.swe.controller.meeting.MeetingSession;
-import com.swe.controller.meeting.UserProfile;
+import com.swe.controller.Meeting.MeetingSession;
+import com.swe.controller.Meeting.UserProfile;
 
 import java.io.IOException;
 import java.net.URI;

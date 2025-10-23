@@ -1,4 +1,4 @@
-package com.swe.controller.meeting;
+package com.swe.controller.Meeting;
 
 import com.swe.controller.AbstractController;
 import com.swe.controller.ClientNode;
@@ -40,7 +40,6 @@ public class MeetingServices {
 //        this.networkController = networkController;
 
         networkController.addUser(deviceNode, clientNode);
-
- 69       return meetings.containsKey(meetingIdParam);
+        return meetings.containsKey(meetingIdParam);
     }
 }
