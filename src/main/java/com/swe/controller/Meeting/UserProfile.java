@@ -1,4 +1,5 @@
 package com.swe.controller.Meeting;
+
 import java.util.UUID;
 
 /**
@@ -88,5 +89,21 @@ public class UserProfile {
 
     public void setLogoUrl(String logoUrl) {
         this.logoUrl = logoUrl;
+    }
+
+
+    /**
+     * Returns a string representation of the UserProfile object.
+     *
+     * @return a string containing email, displayName, passwordHash, logoUrl, and role
+     */
+    public String toJson() {
+        return "UserProfile{"
+                + "\"userId\":\"" + userId + "\","
+                + "\"email\":\"" + email + "\","
+                + "\"displayName\":\"" + displayName + "\","
+                + "\"logoUrl\":\"" + logoUrl + "\","
+                + "\"role\":\"" + role + "\""
+                + "}";
     }
 }
