@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Objects;
 import java.util.UUID;
+import java.time.LocalDateTime;
 
 /**
  * Represents a user's core, permanent profile in the system.
@@ -139,6 +140,13 @@ public class UserProfile {
     public String getRole() {
         return role;
     }
+
+    /**
+     * Gets the joining time of user.
+     *
+     * @return The joining time.
+     */
+    public LocalDateTime getJoinTime() { return LocalDateTime.now(); }
 
     // --- Setters ---
 
