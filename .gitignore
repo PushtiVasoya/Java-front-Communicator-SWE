@@ -4,6 +4,12 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/main/VisualStudio.gitignore
 
+# OAuth tokens
+/tokens/StoredCredential
+
+# Google client secret
+/src/main/resources/client_secret.json
+
 # User-specific files
 *.rsuser
 *.suo
